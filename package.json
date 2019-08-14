@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Sean Ma <maye-msft@outlook.com>",
   "description": "engagements snapshot",
-  "license": null,
+  "license": "",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
@@ -56,8 +56,12 @@
     }
   },
   "dependencies": {
-    "vue": "^2.5.16",
     "axios": "^0.18.0",
+    "azure-devops-node-api": "^9.0.1",
+    "element-theme-dark": "^1.0.3",
+    "element-ui": "^2.11.1",
+    "fuse.js": "^3.4.5",
+    "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
