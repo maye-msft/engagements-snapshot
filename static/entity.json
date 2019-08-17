@@ -1,0 +1,114 @@
+[
+    {
+        "keywords": "SCADA",
+        "name": "SCADA"
+    },
+    {
+        "keywords": "OPC Unified Architecture\nOPC UA",
+        "name": "OPC Unified Architecture"
+    },
+    {
+        "keywords": "Overall equipment effectiveness\nOEE",
+        "name": "Overall equipment effectiveness"
+    },
+    {
+        "keywords": "Remote terminal unit\nRTU",
+        "name": "Remote terminal unit"
+    },
+    {
+        "keywords": "Programmable logic controller\nPLC",
+        "name": "Programmable logic controller"
+    },
+    {
+        "keywords": "Manufacturing execution system\nMES",
+        "name": "Manufacturing execution system"
+    },
+    {
+        "keywords": "Predictive Maintenance\n",
+        "name": "Predictive Maintenance"
+    },
+    {
+        "keywords": "Anomaly\nAbnormal",
+        "name": "Anomaly"
+    },
+    {
+        "keywords": "machine learning\nAI technologies\ncognitive",
+        "name": "machine learning"
+    },
+    {
+        "keywords": "maintenance solution",
+        "name": "maintenance solution"
+    },
+    {
+        "keywords": "quality\nservice engineers\nrepair service",
+        "name": "quality"
+    },
+    {
+        "keywords": "alert\nerror\nalarm",
+        "name": "alert"
+    },
+    {
+        "keywords": "vision\nphoto\noptimally\ncustom vision\nMachine Vision\nPhotograph\nCamera\nVideo\nOptimal maintenance",
+        "name": "Vision"
+    },
+    {
+        "keywords": "Mixed reality\nHoloLens",
+        "name": "Mixed reality"
+    },
+    {
+        "keywords": "monitoring\ndetection",
+        "name": "monitoring"
+    },
+    {
+        "keywords": "Safety\nintelligent security",
+        "name": "Safety"
+    },
+    {
+        "keywords": "factory\nplant\nworkplace",
+        "name": "factory"
+    },
+    {
+        "keywords": "face recognition",
+        "name": "face recognition"
+    },
+    {
+        "keywords": "Speech recognition\nChatbot\nInternet bot\nVirtual assistant\nLUIS\nspeech\nchatbot\nbot platform\nbot framework",
+        "name": "Chatbot"
+    },
+    {
+        "keywords": "warehouse\nlogistic\ninventory\nrouting",
+        "name": "logistic"
+    },
+    {
+        "keywords": "MQTT",
+        "name": "MQTT"
+    },
+    {
+        "keywords": "Robotics",
+        "name": "Robotics"
+    },
+    {
+        "keywords": "open hack\nopenhack",
+        "name": "Open Hack"
+    },
+    {
+        "keywords": "migrate\nmigration",
+        "name": "migrate"
+    },
+    {
+        "keywords": "supply chain",
+        "name": "supply chain"
+    },
+    {
+        "keywords": "Semiconductor\nchip design",
+        "name": "Semiconductor"
+    },
+    {
+        "keywords": "optimization",
+        "name": "optimization"
+    },
+    {
+        "keywords": "s",
+        "name": "Entitydddddcdcdcsdcdsewddwededwdwedewdwedwedew"
+    }
+]

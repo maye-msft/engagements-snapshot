@@ -1,52 +1,110 @@
 <template>
-    <el-container id="page">
-    <el-row style="width:100%">
-        <el-col :xs="24" style="width:100%">
-            <el-header>
-        <query-form ></query-form>
-            </el-header>
-        </el-col>
-
-        <el-col :xs="24">
-        Main {{main}}
-        </el-col>
-   </el-row>
-    </el-container>
+  <el-container id="page">
+    <el-row style="width:98%">
+      <el-col :xs="24">
+        <el-header>
+          <query-form></query-form>
+        </el-header>
+      </el-col>
+      <el-col :xs="24">
+        <el-progress :percentage="100" status="success"></el-progress>
+      </el-col>
+      <el-col :xs="24">
+        <el-tabs
+          v-model="tab"
+          :tab-position="'left'"
+          @tab-click="handleClick"
+          style="margin:20px; "
+        >
+          <el-tab-pane name="result">
+            <span slot="label">
+              <i class="el-icon-s-data"></i>
+            </span>
+            <query-result></query-result>
+          </el-tab-pane>
+          <el-tab-pane label="Settings" name="settings">
+            <span slot="label">
+              <i class="el-icon-s-tools"></i>
+            </span>
+            <settings></settings>
+          </el-tab-pane>
+        </el-tabs>
+        Main {{main}} {{entities.length}}
+        {{access_token}}
+      </el-col>
+    </el-row>
+  </el-container>
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex"
+import QueryForm from "./MainPage/QueryForm"
+import Settings from "./MainPage/Settings"
+import QueryResult from "./MainPage/QueryResult"
+import fs from 'fs'
+import path from 'path'
 
-import { mapState } from 'vuex'
-import QueryForm from './MainPage/QueryForm'
 // import { createNamespacedHelpers } from 'vuex'
 
 // const { mapState } = createNamespacedHelpers('Counter')
 
 export default {
-  components: { QueryForm },
+  components: { QueryForm, QueryResult, Settings },
   methods: {
-    startHacking () {
+    ...mapActions('Entity', ["importEntities"]),
+    ...mapActions('Category', ["importCategories"]),
+    ...mapActions('Token', ["setToken"]),
+    startHacking() {
       this.$notify({
-        title: 'It works!',
-        type: 'success',
-        message: 'We\'ve laid the ground work for you. It\'s time for you to build something epic!',
+        title: "It works!",
+        type: "success",
+        message:
+          "We've laid the ground work for you. It's time for you to build something epic!",
         duration: 5000
-      })
+      });
+    },
+    handleClick(tab, event) {
+      console.log(tab, event);
     }
   },
   computed: {
     ...mapState({
-      main: state => state.Counter.main
+      main: state => state.Counter.main,
+      entities: state => state.Entity.entities,
+      categories: state => state.Category.categories,
+      access_token: state => state.Token.access_token
     })
+  },
+  data() {
+    return {
+      tab: "result"
+    };
+  },
+  mounted() {
+    // var p = path.join(__dirname, '../../../static/', 'scenario.json')
+    // var scenario = JSON.parse(fs.readFileSync(p, 'utf8'))
+    // this.importEntities(scenario.entities)
+    // this.importCategories(scenario.categories)
+
+    var token_path = path.join(__dirname, '../../../static/', 'token.json')
+    var token_json = JSON.parse(fs.readFileSync(token_path, 'utf8'))
+    this.setToken(token_json.TOKEN)
+
+    var category_path = path.join(__dirname, '../../../static/', 'category.json')
+    var category_json = JSON.parse(fs.readFileSync(category_path, 'utf8'))
+    this.importCategories(category_json)
+
+    var entity_path = path.join(__dirname, '../../../static/', 'entity.json')
+    var entity_json = JSON.parse(fs.readFileSync(entity_path, 'utf8'))
+    this.importEntities(entity_json)
   }
-}
+};
 </script>
 
 <style>
 #page {
   font-family: Helvetica, sans-serif;
   text-align: center;
-  margin: 0.5rem
+  margin: 0.5rem;
 }
-
 </style>

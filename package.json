@@ -58,6 +58,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "azure-devops-node-api": "^9.0.1",
+    "electron-storage": "^1.0.7",
     "element-theme-dark": "^1.0.3",
     "element-ui": "^2.11.1",
     "fuse.js": "^3.4.5",

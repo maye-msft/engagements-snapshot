@@ -1,0 +1,286 @@
+{
+    "entities": [
+        {
+            "name": "SCADA",
+            "keywords": "SCADA"
+        },
+        {
+            "name": "OPC Unified Architecture",
+            "keywords": "OPC Unified Architecture\nOPC UA"
+        },
+        {
+            "name": "Overall equipment effectiveness",
+            "keywords": "Overall equipment effectiveness\nOEE"
+        },
+        {
+            "name": "Remote terminal unit",
+            "keywords": "Remote terminal unit\nRTU"
+        },
+        {
+            "name": "Programmable logic controller",
+            "keywords": "Programmable logic controller\nPLC"
+        },
+        {
+            "name": "Manufacturing execution system",
+            "keywords": "Manufacturing execution system\nMES"
+        },
+        {
+            "name": "Predictive Maintenance",
+            "keywords": "Predictive Maintenance\n"
+        },
+        {
+            "name": "Anomaly",
+            "keywords": "Anomaly\nAbnormal"
+        },
+        {
+            "name": "machine learning",
+            "keywords": "machine learning\nAI technologies\ncognitive"
+        },
+        {
+            "name": "maintenance solution",
+            "keywords": "maintenance solution"
+        },
+        {
+            "name": "quality",
+            "keywords": "quality\nservice engineers\nrepair service"
+        },
+        {
+            "name": "alert",
+            "keywords": "alert\nerror\nalarm"
+        },
+        {
+            "name": "Vision",
+            "keywords": "vision\nphoto\noptimally\ncustom vision\nMachine Vision\nPhotograph\nCamera\nVideo\nOptimal maintenance"
+        },
+        {
+            "name": "Mixed reality",
+            "keywords": "Mixed reality\nHoloLens"
+        },
+        {
+            "name": "monitoring",
+            "keywords": "monitoring\ndetection"
+        },
+        {
+            "name": "Safety",
+            "keywords": "Safety\nintelligent security"
+        },
+        {
+            "name": "factory",
+            "keywords": "factory\nplant\nworkplace"
+        },
+        {
+            "name": "face recognition",
+            "keywords": "face recognition"
+        },
+        {
+            "name": "Chatbot",
+            "keywords": "Speech recognition\nChatbot\nInternet bot\nVirtual assistant\nLUIS\nspeech\nchatbot\nbot platform\nbot framework"
+        },
+        {
+            "name": "logistic",
+            "keywords": "warehouse\nlogistic\ninventory\nrouting"
+        },
+        {
+            "name": "MQTT",
+            "keywords": "MQTT"
+        },
+        {
+            "name": "Robotics",
+            "keywords": "Robotics"
+        },
+        {
+            "name": "Open Hack",
+            "keywords": "open hack\nopenhack"
+        },
+        {
+            "name": "migrate",
+            "keywords": "migrate\nmigration"
+        },
+        {
+            "name": "supply chain",
+            "keywords": "supply chain"
+        },
+        {
+            "name": "Semiconductor",
+            "keywords": "Semiconductor\nchip design"
+        },
+        {
+            "name": "optimization",
+            "keywords": "optimization"
+        }
+    ],
+    "categories": [
+        {
+            "name": "Connected Factory",
+            "rules": [
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "SCADA",
+                        "OPC Unified Architecture",
+                        "Overall equipment effectiveness",
+                        "Remote terminal unit",
+                        "Programmable logic controller",
+                        "Manufacturing execution system",
+                        "MQTT",
+                        "Robotics"
+                    ],
+                    "secondaryobjects": []
+                }
+            ]
+        },
+        {
+            "name": "Predictive Maintenance",
+            "rules": [
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "machine learning"
+                    ],
+                    "secondaryobjects": [
+                        "maintenance solution"
+                    ]
+                },
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "Predictive Maintenance"
+                    ],
+                    "secondaryobjects": []
+                },
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "Anomaly"
+                    ],
+                    "secondaryobjects": [
+                        "monitoring",
+                        "alert"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cognitive Quality",
+            "rules": [
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "quality",
+                        "Vision"
+                    ],
+                    "secondaryobjects": [
+                        "machine learning"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Mixed Reality",
+            "rules": [
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "Mixed reality"
+                    ],
+                    "secondaryobjects": []
+                }
+            ]
+        },
+        {
+            "name": "Service Bot",
+            "rules": [
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "Chatbot"
+                    ],
+                    "secondaryobjects": []
+                }
+            ]
+        },
+        {
+            "name": "Healthy & Safety",
+            "rules": [
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "Safety"
+                    ],
+                    "secondaryobjects": [
+                        "factory",
+                        "logistic"
+                    ]
+                },
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "face recognition"
+                    ],
+                    "secondaryobjects": [
+                        "logistic",
+                        "factory"
+                    ]
+                },
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "Safety"
+                    ],
+                    "secondaryobjects": [
+                        "monitoring",
+                        "Vision"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Openhack",
+            "rules": [
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "Open Hack"
+                    ],
+                    "secondaryobjects": []
+                }
+            ]
+        },
+        {
+            "name": "Migration",
+            "rules": [
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "migrate"
+                    ],
+                    "secondaryobjects": []
+                }
+            ]
+        },
+        {
+            "name": "Supply Chain",
+            "rules": [
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "supply chain"
+                    ],
+                    "secondaryobjects": []
+                }
+            ]
+        },
+        {
+            "name": "Semiconductor ",
+            "rules": [
+                {
+                    "name": "Rule",
+                    "primaryobjects": [
+                        "Semiconductor"
+                    ],
+                    "secondaryobjects": []
+                }
+            ]
+        }
+    ]
+}

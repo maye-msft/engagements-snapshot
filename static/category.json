@@ -1,0 +1,198 @@
+[
+    {
+        "name": "Connected Factory",
+        "rules": [
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "SCADA",
+                    "OPC Unified Architecture",
+                    "Overall equipment effectiveness",
+                    "Remote terminal unit",
+                    "Programmable logic controller",
+                    "Manufacturing execution system",
+                    "MQTT",
+                    "Robotics"
+                ],
+                "secondaryobjects": []
+            }
+        ]
+    },
+    {
+        "name": "Predictive Maintenance",
+        "rules": [
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "machine learning"
+                ],
+                "secondaryobjects": [
+                    "maintenance solution"
+                ]
+            },
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "Predictive Maintenance"
+                ],
+                "secondaryobjects": []
+            },
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "Anomaly"
+                ],
+                "secondaryobjects": [
+                    "monitoring",
+                    "alert"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Cognitive Quality",
+        "rules": [
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "quality",
+                    "Vision"
+                ],
+                "secondaryobjects": [
+                    "machine learning"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Mixed Reality",
+        "rules": [
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "Mixed reality"
+                ],
+                "secondaryobjects": []
+            }
+        ]
+    },
+    {
+        "name": "Service Bot",
+        "rules": [
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "Chatbot"
+                ],
+                "secondaryobjects": []
+            }
+        ]
+    },
+    {
+        "name": "Healthy & Safety",
+        "rules": [
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "Safety"
+                ],
+                "secondaryobjects": [
+                    "factory",
+                    "logistic"
+                ]
+            },
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "face recognition"
+                ],
+                "secondaryobjects": [
+                    "logistic",
+                    "factory"
+                ]
+            },
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "Safety"
+                ],
+                "secondaryobjects": [
+                    "monitoring",
+                    "Vision"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Openhack",
+        "rules": [
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "Open Hack"
+                ],
+                "secondaryobjects": []
+            }
+        ]
+    },
+    {
+        "name": "Migration",
+        "rules": [
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "migrate"
+                ],
+                "secondaryobjects": []
+            }
+        ]
+    },
+    {
+        "name": "Supply Chain",
+        "rules": [
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "supply chain"
+                ],
+                "secondaryobjects": []
+            }
+        ]
+    },
+    {
+        "name": "Semiconductor ",
+        "rules": [
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "Semiconductor"
+                ],
+                "secondaryobjects": []
+            }
+        ]
+    },
+    {
+        "name": "Test Category 1eeeeeeeeeeee",
+        "rules": [
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "SCADA"
+                ],
+                "secondaryobjects": []
+            },
+            {
+                "name": "Rule",
+                "primaryobjects": [],
+                "secondaryobjects": []
+            },
+            {
+                "name": "Rule",
+                "primaryobjects": [
+                    "Predictive Maintenance"
+                ],
+                "secondaryobjects": []
+            }
+        ]
+    }
+]
