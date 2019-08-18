@@ -1,48 +1,148 @@
 <template>
   <el-table
-    :data="tableData"
+    :data="engagements"
     stripe
     border
-    style="margin:0px">
+    height="650"
+    :default-sort="{prop: 'date', order: 'descending'}"
+    style="width: 100%"
+  >
+    <el-table-column type="expand" fixed>
+      <template slot-scope="props">
+      <el-form>
+
+        <template v-for="fieldkey in Object.keys(objects[props.row.id].value.fields)">
+          <template v-if="typeof objects[props.row.id].value.fields[fieldkey] != 'object'">
+            <el-form-item :label="fieldkey">
+              <span v-html="objects[props.row.id].value.fields[fieldkey]"></span>
+            </el-form-item>
+          </template>
+          <template
+            v-else
+            v-for="subfieldkey in Object.keys(objects[props.row.id].value.fields[fieldkey] )"
+          >
+            <template
+              v-if="typeof objects[props.row.id].value.fields[fieldkey][subfieldkey] != 'object'"
+            >
+              <el-form-item :label="fieldkey+'-'+subfieldkey">
+                <span v-html="objects[props.row.id].value.fields[fieldkey][subfieldkey]"></span>
+              </el-form-item>
+            </template>
+          </template>
+        </template>
+      </el-form>
+      </template>
+    </el-table-column>
+    <el-table-column sortable fixed label="ID" width="100">
+      <template slot-scope="scope">
+        <el-button @click="showUrl(scope.row.engagementUrl)" type="text">{{ scope.row.id }}</el-button>
+      </template>
+    </el-table-column>
+    <el-table-column sortable prop="organizationId" label="Org" width="180">
+      <template slot-scope="scope">
+        <el-button
+          @click="showUrl(scope.row.organizationUrl)"
+          type="text"
+        >{{ scope.row.organization }}</el-button>
+      </template>
+    </el-table-column>
+    <el-table-column sortable prop="title" label="Ttile" width="300"></el-table-column>
+    <el-table-column sortable prop="assignedto" label="Assigned To" width="150"></el-table-column>
     <el-table-column
-      prop="date"
-      label="Date"
-      width="180">
+      sortable
+      prop="status"
+      label="Status"
+      :filters="[{value:'Active', text:'Active'}, {value:'Healthy', text:'Healthy'}, {value:'Not Engaged',text:'Not Engaged'}, {value:'Business Blocked',text:'Business Blocked'}]"
+      :filter-method="(value, row)=>{return row.status.indexOf(value)!=-1}"
+      width="150"
+    >
+      <template slot-scope="scope">
+        <el-tag
+          :type="status2Tag(scope.row.status)"
+          disable-transitions
+        >{{showStatus(scope.row.status)}}</el-tag>
+      </template>
     </el-table-column>
     <el-table-column
-      prop="name"
-      label="Name"
-      width="180">
+      sortable
+      prop="category"
+      label="Category"
+      :filters="cates"
+      :filter-method="filterCate"
+      width="150"
+    >
+      <template slot-scope="scope">
+        <span>{{ (scope.row.category && scope.row.category.length>0)?(scope.row.category.join('; ')):'N/A' }}</span>
+      </template>
     </el-table-column>
-    <el-table-column
-      prop="address"
-      label="Address">
+    <el-table-column prop="startDate" label="Time" width="250">
+      <template slot-scope="scope">
+        <span>{{ scope.row.startDate }} - {{ scope.row.endDate }}</span>
+      </template>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        tableData: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }]
+import { mapState, mapMutations, mapActions } from "vuex";
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapState({
+      engagements: state => state.Engagement.engagements,
+      objects: state => state.Engagement.objects
+    }),
+    orgs() {
+      var orgs = [];
+      this.engagements.forEach(eng => {
+        orgs.push({ text: eng.organization, value: eng.organizationId });
+      });
+      return orgs;
+    },
+    cates() {
+      var cates = [{ text: "N/A", value: "N/A" }];
+      this.engagements.forEach(eng => {
+        if (eng.category) {
+          eng.category.forEach(cate => {
+            cates.push({ text: cate, value: cate });
+          });
+        }
+      });
+      return cates;
+    }
+  },
+  methods: {
+    showUrl(url) {
+      require("electron").shell.openExternal(url);
+      //console.log(row);
+    },
+    filterOrg(value, row) {
+      return row.organizationId === value;
+    },
+    filterCate(value, row) {
+      return (
+        (row.category && row.category.indexOf(value) != -1) ||
+        (!row.category && value == "N/A")
+      );
+    },
+    status2Tag(status) {
+      if (status.indexOf("Yellow") != -1) {
+        return "warning";
+      } else if (status.indexOf("Green") != -1) {
+        return "success";
+      } else if (status.indexOf("Black") != -1) {
+        return "danger";
+      } else if (status.indexOf("Gray") != -1) {
+        return "info";
+      } else {
+        return "";
       }
+    },
+    showStatus(tag) {
+      return tag.substr(0, tag.indexOf("("));
     }
   }
+};
 </script>

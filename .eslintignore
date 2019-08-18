@@ -2,3 +2,4 @@ test/unit/coverage/**
 test/unit/*.js
 test/e2e/*.js
 **/*.vue
+src/renderer/components/MainPage/ado/*.js
