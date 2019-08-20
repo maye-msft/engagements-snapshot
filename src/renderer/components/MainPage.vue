@@ -85,34 +85,34 @@ export default {
 
     const defaultDataPath = storage.getDefaultDataPath()
     console.log(defaultDataPath);
-
+    var that = this;
     storage.get('token', function(error, data) {
       if (error) throw error;
-
-      if(!data) {
+      
+      if(Object.keys(data).length==0) {
         var token_path = path.join(__static, 'token.json')
         var token_json = JSON.parse(fs.readFileSync(token_path, 'utf8'))
-        this.setToken(token_json.TOKEN)
+        that.setToken(token_json.TOKEN)
       }
     });
 
     storage.get('category', function(error, data) {
       if (error) throw error;
 
-      if(!data) {
+      if(Object.keys(data).length==0) {
         var category_path = path.join(__static, 'category.json')
         var category_json = JSON.parse(fs.readFileSync(category_path, 'utf8'))
-        this.importCategories(category_json)
+        that.importCategories(category_json)
       }
     });
 
     storage.get('entity', function(error, data) {
       if (error) throw error;
 
-      if(!data) {
+      if(Object.keys(data).length==0) {
         var entity_path = path.join(__static, 'entity.json')
         var entity_json = JSON.parse(fs.readFileSync(entity_path, 'utf8'))
-        this.importEntities(entity_json)
+        that.importEntities(entity_json)
       }
     });
     
