@@ -1,6 +1,6 @@
-import fs from 'fs'
-import path from 'path'
-
+// import fs from 'fs'
+// import path from 'path'
+import storage from 'electron-json-storage'
 const state = {
   categories: []
 }
@@ -33,8 +33,14 @@ const mutations = {
     state.categories = categories
   },
   saveCategory (state) {
-    var p = path.join(__dirname, '../../../../static/', 'category.json')
-    fs.writeFileSync(p, JSON.stringify(state.categories, null, 4), 'utf8')
+    storage.set('category', state.categories, function (error) {
+      if (error) {
+        throw error
+      }
+    })
+
+    // var p = path.join(__dirname, '../../../../static/', 'category.json')
+    // fs.writeFileSync(p, JSON.stringify(state.categories, null, 4), 'utf8')
   }
 }
 

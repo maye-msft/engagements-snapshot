@@ -109,17 +109,6 @@ eval("module.exports = JSON.parse(\"{\\\"_args\\\":[[\\\"7zip@0.0.6\\\",\\\"/Use
 
 /***/ }),
 
-/***/ "./node_modules/babel-runtime/core-js/json/stringify.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/babel-runtime/core-js/json/stringify.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("module.exports = { \"default\": __webpack_require__(/*! core-js/library/fn/json/stringify */ \"./node_modules/core-js/library/fn/json/stringify.js\"), __esModule: true };\n\n//# sourceURL=webpack:///./node_modules/babel-runtime/core-js/json/stringify.js?");
-
-/***/ }),
-
 /***/ "./node_modules/balanced-match/index.js":
 /*!**********************************************!*\
   !*** ./node_modules/balanced-match/index.js ***!
@@ -151,28 +140,6 @@ eval("var concatMap = __webpack_require__(/*! concat-map */ \"./node_modules/con
 /***/ (function(module, exports) {
 
 eval("module.exports = function (xs, fn) {\n    var res = [];\n    for (var i = 0; i < xs.length; i++) {\n        var x = fn(xs[i], i);\n        if (isArray(x)) res.push.apply(res, x);\n        else res.push(x);\n    }\n    return res;\n};\n\nvar isArray = Array.isArray || function (xs) {\n    return Object.prototype.toString.call(xs) === '[object Array]';\n};\n\n\n//# sourceURL=webpack:///./node_modules/concat-map/index.js?");
-
-/***/ }),
-
-/***/ "./node_modules/core-js/library/fn/json/stringify.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/core-js/library/fn/json/stringify.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var core = __webpack_require__(/*! ../../modules/_core */ \"./node_modules/core-js/library/modules/_core.js\");\nvar $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });\nmodule.exports = function stringify(it) { // eslint-disable-line no-unused-vars\n  return $JSON.stringify.apply($JSON, arguments);\n};\n\n\n//# sourceURL=webpack:///./node_modules/core-js/library/fn/json/stringify.js?");
-
-/***/ }),
-
-/***/ "./node_modules/core-js/library/modules/_core.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/core-js/library/modules/_core.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("var core = module.exports = { version: '2.6.9' };\nif (typeof __e == 'number') __e = core; // eslint-disable-line no-undef\n\n\n//# sourceURL=webpack:///./node_modules/core-js/library/modules/_core.js?");
 
 /***/ }),
 
@@ -571,7 +538,7 @@ eval("var map = {\n\t\"./Category.js\": \"./src/renderer/store/modules/Category.
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(function(__dirname) {/* harmony import */ var babel_runtime_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! babel-runtime/core-js/json/stringify */ \"./node_modules/babel-runtime/core-js/json/stringify.js\");\n/* harmony import */ var babel_runtime_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ \"fs\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! path */ \"path\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nvar state = {\n  categories: []\n};\n\nvar mutations = {\n  addCategory: function addCategory(state, category) {\n    state.categories.push({ name: category, rules: [] });\n  },\n  removeCategory: function removeCategory(state, index) {\n    state.categories.splice(index, 1);\n  },\n  removeAllCategory: function removeAllCategory(state, index) {\n    state.categories = [];\n  },\n  addCategoryRule: function addCategoryRule(state, param) {\n    var cateIndex = param[0];\n    var rule = param[1];\n    state.categories[cateIndex].rules.push({\n      name: rule,\n      primaryobjects: [],\n      secondaryobjects: []\n    });\n  },\n  removeCategoryRule: function removeCategoryRule(state, param) {\n    var cateIndex = param[0];\n    var index = param[1];\n    state.categories[cateIndex].rules.splice(index, 1);\n  },\n  importCategories: function importCategories(state, categories) {\n    state.categories = categories;\n  },\n  saveCategory: function saveCategory(state) {\n    var p = path__WEBPACK_IMPORTED_MODULE_2___default.a.join(__dirname, '../../../../static/', 'category.json');\n    fs__WEBPACK_IMPORTED_MODULE_1___default.a.writeFileSync(p, babel_runtime_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(state.categories, null, 4), 'utf8');\n  }\n};\n\nvar actions = {\n  addCategory: function addCategory(_ref, category) {\n    var commit = _ref.commit;\n\n    commit('addCategory', category);\n    commit('saveCategory');\n  },\n  removeCategory: function removeCategory(_ref2, index) {\n    var commit = _ref2.commit;\n\n    commit('removeCategory', index);\n    commit('saveCategory');\n  },\n  removeAllCategory: function removeAllCategory(_ref3, index) {\n    var commit = _ref3.commit;\n\n    commit('removeAllCategory', index);\n    commit('saveCategory');\n  },\n  addCategoryRule: function addCategoryRule(_ref4, param) {\n    var commit = _ref4.commit;\n\n    commit('addCategoryRule', param);\n    commit('saveCategory');\n  },\n  removeCategoryRule: function removeCategoryRule(_ref5, param) {\n    var commit = _ref5.commit;\n\n    commit('removeCategoryRule', param);\n    commit('saveCategory');\n  },\n  importCategories: function importCategories(_ref6, categories) {\n    var commit = _ref6.commit;\n\n    commit('importCategories', categories);\n    commit('saveCategory');\n  },\n  saveCategory: function saveCategory(_ref7) {\n    var commit = _ref7.commit;\n\n    commit('saveCategory');\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  namespaced: true,\n  state: state,\n  mutations: mutations,\n  actions: actions\n});\n/* WEBPACK VAR INJECTION */}.call(this, \"src/renderer/store/modules\"))\n\n//# sourceURL=webpack:///./src/renderer/store/modules/Category.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var electron_json_storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron-json-storage */ \"electron-json-storage\");\n/* harmony import */ var electron_json_storage__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron_json_storage__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar state = {\n  categories: []\n};\n\nvar mutations = {\n  addCategory: function addCategory(state, category) {\n    state.categories.push({ name: category, rules: [] });\n  },\n  removeCategory: function removeCategory(state, index) {\n    state.categories.splice(index, 1);\n  },\n  removeAllCategory: function removeAllCategory(state, index) {\n    state.categories = [];\n  },\n  addCategoryRule: function addCategoryRule(state, param) {\n    var cateIndex = param[0];\n    var rule = param[1];\n    state.categories[cateIndex].rules.push({\n      name: rule,\n      primaryobjects: [],\n      secondaryobjects: []\n    });\n  },\n  removeCategoryRule: function removeCategoryRule(state, param) {\n    var cateIndex = param[0];\n    var index = param[1];\n    state.categories[cateIndex].rules.splice(index, 1);\n  },\n  importCategories: function importCategories(state, categories) {\n    state.categories = categories;\n  },\n  saveCategory: function saveCategory(state) {\n    electron_json_storage__WEBPACK_IMPORTED_MODULE_0___default.a.set('category', state.categories, function (error) {\n      if (error) {\n        throw error;\n      }\n    });\n  }\n};\n\nvar actions = {\n  addCategory: function addCategory(_ref, category) {\n    var commit = _ref.commit;\n\n    commit('addCategory', category);\n    commit('saveCategory');\n  },\n  removeCategory: function removeCategory(_ref2, index) {\n    var commit = _ref2.commit;\n\n    commit('removeCategory', index);\n    commit('saveCategory');\n  },\n  removeAllCategory: function removeAllCategory(_ref3, index) {\n    var commit = _ref3.commit;\n\n    commit('removeAllCategory', index);\n    commit('saveCategory');\n  },\n  addCategoryRule: function addCategoryRule(_ref4, param) {\n    var commit = _ref4.commit;\n\n    commit('addCategoryRule', param);\n    commit('saveCategory');\n  },\n  removeCategoryRule: function removeCategoryRule(_ref5, param) {\n    var commit = _ref5.commit;\n\n    commit('removeCategoryRule', param);\n    commit('saveCategory');\n  },\n  importCategories: function importCategories(_ref6, categories) {\n    var commit = _ref6.commit;\n\n    commit('importCategories', categories);\n    commit('saveCategory');\n  },\n  saveCategory: function saveCategory(_ref7) {\n    var commit = _ref7.commit;\n\n    commit('saveCategory');\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  namespaced: true,\n  state: state,\n  mutations: mutations,\n  actions: actions\n});\n\n//# sourceURL=webpack:///./src/renderer/store/modules/Category.js?");
 
 /***/ }),
 
@@ -607,7 +574,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nvar state = {\n  engagements:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(function(__dirname) {/* harmony import */ var babel_runtime_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! babel-runtime/core-js/json/stringify */ \"./node_modules/babel-runtime/core-js/json/stringify.js\");\n/* harmony import */ var babel_runtime_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ \"fs\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! path */ \"path\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nvar state = {\n  entities: []\n};\n\nvar mutations = {\n  addEntity: function addEntity(state, entity) {\n    state.entities.push({ name: entity, keywords: '' });\n  },\n  removeEntity: function removeEntity(state, index) {\n    state.entities.splice(index, 1);\n  },\n  setEntity: function setEntity(state, param) {\n    state.entities[param[0]].name = param[1].name;\n    state.entities[param[0]].keywords = param[1].keywords;\n  },\n  deleteAllEntity: function deleteAllEntity(state) {\n    state.entities = [];\n  },\n  importEntities: function importEntities(state, entities) {\n    state.entities = entities;\n  },\n  saveEntity: function saveEntity(state) {\n    var p = path__WEBPACK_IMPORTED_MODULE_2___default.a.join(__dirname, '../../../../static/', 'entity.json');\n    fs__WEBPACK_IMPORTED_MODULE_1___default.a.writeFileSync(p, babel_runtime_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_0___default()(state.entities, null, 4), 'utf8');\n  }\n};\n\nvar actions = {\n  addEntity: function addEntity(_ref, data) {\n    var commit = _ref.commit;\n\n    commit('addEntity', data);\n    commit('saveEntity');\n  },\n  removeEntity: function removeEntity(_ref2, index) {\n    var commit = _ref2.commit;\n\n    commit('removeEntity', index);\n    commit('saveEntity');\n  },\n  setEntity: function setEntity(_ref3, param) {\n    var commit = _ref3.commit;\n\n    commit('setEntity', param);\n  },\n  deleteAllEntity: function deleteAllEntity(_ref4) {\n    var commit = _ref4.commit;\n\n    commit('deleteAllEntity');\n    commit('saveEntity');\n  },\n  importEntities: function importEntities(_ref5, data) {\n    var commit = _ref5.commit;\n\n    commit('importEntities', data);\n    commit('saveEntity');\n  },\n  saveEntity: function saveEntity(_ref6) {\n    var commit = _ref6.commit;\n\n    commit('saveEntity');\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  namespaced: true,\n  state: state,\n  mutations: mutations,\n  actions: actions\n});\n/* WEBPACK VAR INJECTION */}.call(this, \"src/renderer/store/modules\"))\n\n//# sourceURL=webpack:///./src/renderer/store/modules/Entity.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var electron_json_storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron-json-storage */ \"electron-json-storage\");\n/* harmony import */ var electron_json_storage__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron_json_storage__WEBPACK_IMPORTED_MODULE_0__);\n\n\n\nvar state = {\n  entities: []\n};\n\nvar mutations = {\n  addEntity: function addEntity(state, entity) {\n    state.entities.push({ name: entity, keywords: '' });\n  },\n  removeEntity: function removeEntity(state, index) {\n    state.entities.splice(index, 1);\n  },\n  setEntity: function setEntity(state, param) {\n    state.entities[param[0]].name = param[1].name;\n    state.entities[param[0]].keywords = param[1].keywords;\n  },\n  deleteAllEntity: function deleteAllEntity(state) {\n    state.entities = [];\n  },\n  importEntities: function importEntities(state, entities) {\n    state.entities = entities;\n  },\n  saveEntity: function saveEntity(state) {\n    electron_json_storage__WEBPACK_IMPORTED_MODULE_0___default.a.set('entity', state.entities, function (error) {\n      if (error) {\n        throw error;\n      }\n    });\n  }\n};\n\nvar actions = {\n  addEntity: function addEntity(_ref, data) {\n    var commit = _ref.commit;\n\n    commit('addEntity', data);\n    commit('saveEntity');\n  },\n  removeEntity: function removeEntity(_ref2, index) {\n    var commit = _ref2.commit;\n\n    commit('removeEntity', index);\n    commit('saveEntity');\n  },\n  setEntity: function setEntity(_ref3, param) {\n    var commit = _ref3.commit;\n\n    commit('setEntity', param);\n  },\n  deleteAllEntity: function deleteAllEntity(_ref4) {\n    var commit = _ref4.commit;\n\n    commit('deleteAllEntity');\n    commit('saveEntity');\n  },\n  importEntities: function importEntities(_ref5, data) {\n    var commit = _ref5.commit;\n\n    commit('importEntities', data);\n    commit('saveEntity');\n  },\n  saveEntity: function saveEntity(_ref6) {\n    var commit = _ref6.commit;\n\n    commit('saveEntity');\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  namespaced: true,\n  state: state,\n  mutations: mutations,\n  actions: actions\n});\n\n//# sourceURL=webpack:///./src/renderer/store/modules/Entity.js?");
 
 /***/ }),
 
@@ -619,7 +586,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(f
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n\nvar state = {\n  access_token: ''\n};\n\nvar mutations = {\n  setToken: function setToken(state, token) {\n    state.access_token = token;\n  }\n};\n\nvar actions = {\n  setToken: function setToken(_ref, token) {\n    var commit = _ref.commit;\n\n    commit('setToken', token);\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  namespaced: true,\n  state: state,\n  mutations: mutations,\n  actions: actions\n});\n\n//# sourceURL=webpack:///./src/renderer/store/modules/Token.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var electron_json_storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron-json-storage */ \"electron-json-storage\");\n/* harmony import */ var electron_json_storage__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron_json_storage__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar state = {\n  access_token: ''\n};\n\nvar mutations = {\n  setToken: function setToken(state, token) {\n    state.access_token = token;\n  },\n  saveToken: function saveToken(state) {\n    electron_json_storage__WEBPACK_IMPORTED_MODULE_0___default.a.set('token', state.access_token, function (error) {\n      if (error) {\n        throw error;\n      }\n    });\n  }\n};\n\nvar actions = {\n  setToken: function setToken(_ref, token) {\n    var commit = _ref.commit;\n\n    commit('setToken', token);\n  },\n  saveToken: function saveToken(_ref2) {\n    var commit = _ref2.commit;\n\n    commit('saveToken');\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  namespaced: true,\n  state: state,\n  mutations: mutations,\n  actions: actions\n});\n\n//# sourceURL=webpack:///./src/renderer/store/modules/Token.js?");
 
 /***/ }),
 
@@ -676,6 +643,17 @@ eval("module.exports = require(\"child_process\");\n\n//# sourceURL=webpack:///e
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"electron\");\n\n//# sourceURL=webpack:///external_%22electron%22?");
+
+/***/ }),
+
+/***/ "electron-json-storage":
+/*!****************************************!*\
+  !*** external "electron-json-storage" ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"electron-json-storage\");\n\n//# sourceURL=webpack:///external_%22electron-json-storage%22?");
 
 /***/ }),
 

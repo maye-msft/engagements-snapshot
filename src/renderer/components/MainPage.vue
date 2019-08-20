@@ -7,9 +7,6 @@
         </el-header>
       </el-col>
       <el-col :xs="24">
-        <el-progress :percentage="100" status="success"></el-progress>
-      </el-col>
-      <el-col :xs="24">
         <el-tabs
           v-model="tab"
           :tab-position="'left'"
@@ -29,8 +26,6 @@
             <settings></settings>
           </el-tab-pane>
         </el-tabs>
-        Main {{main}} {{entities.length}}
-        {{access_token}}
       </el-col>
     </el-row>
   </el-container>
@@ -43,7 +38,8 @@ import Settings from "./MainPage/Settings"
 import QueryResult from "./MainPage/QueryResult"
 import fs from 'fs'
 import path from 'path'
-
+import os from 'os'
+import storage  from 'electron-json-storage'
 // import { createNamespacedHelpers } from 'vuex'
 
 // const { mapState } = createNamespacedHelpers('Counter')
@@ -64,7 +60,7 @@ export default {
       });
     },
     handleClick(tab, event) {
-      console.log(tab, event);
+      //console.log(tab, event);
     }
   },
   computed: {
@@ -86,17 +82,45 @@ export default {
     // this.importEntities(scenario.entities)
     // this.importCategories(scenario.categories)
 
-    var token_path = path.join(__dirname, '../../../static/', 'token.json')
-    var token_json = JSON.parse(fs.readFileSync(token_path, 'utf8'))
-    this.setToken(token_json.TOKEN)
 
-    var category_path = path.join(__dirname, '../../../static/', 'category.json')
-    var category_json = JSON.parse(fs.readFileSync(category_path, 'utf8'))
-    this.importCategories(category_json)
+    const defaultDataPath = storage.getDefaultDataPath()
+    console.log(defaultDataPath);
 
-    var entity_path = path.join(__dirname, '../../../static/', 'entity.json')
-    var entity_json = JSON.parse(fs.readFileSync(entity_path, 'utf8'))
-    this.importEntities(entity_json)
+    storage.get('token', function(error, data) {
+      if (error) throw error;
+
+      if(!data) {
+        var token_path = path.join(__static, 'token.json')
+        var token_json = JSON.parse(fs.readFileSync(token_path, 'utf8'))
+        this.setToken(token_json.TOKEN)
+      }
+    });
+
+    storage.get('category', function(error, data) {
+      if (error) throw error;
+
+      if(!data) {
+        var category_path = path.join(__static, 'category.json')
+        var category_json = JSON.parse(fs.readFileSync(category_path, 'utf8'))
+        this.importCategories(category_json)
+      }
+    });
+
+    storage.get('entity', function(error, data) {
+      if (error) throw error;
+
+      if(!data) {
+        var entity_path = path.join(__static, 'entity.json')
+        var entity_json = JSON.parse(fs.readFileSync(entity_path, 'utf8'))
+        this.importEntities(entity_json)
+      }
+    });
+    
+
+
+
+
+
   }
 };
 </script>

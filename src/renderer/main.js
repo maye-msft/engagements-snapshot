@@ -10,7 +10,9 @@ import ElementUI from 'element-ui'
 // import 'element-theme-dark/lib/index.css'
 import 'element-ui/lib/theme-chalk/index.css'
 
-Vue.use(ElementUI)
+import locale from 'element-ui/lib/locale/lang/en'
+
+Vue.use(ElementUI, { locale })
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
@@ -25,5 +27,4 @@ new Vue({
   mounted: function () {
     this.$router.push({path: '/main'})
   }
-
 }).$mount('#app')

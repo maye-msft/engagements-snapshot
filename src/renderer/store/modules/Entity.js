@@ -1,5 +1,6 @@
-import fs from 'fs'
-import path from 'path'
+// import fs from 'fs'
+// import path from 'path'
+import storage from 'electron-json-storage'
 
 const state = {
   entities: []
@@ -23,8 +24,13 @@ const mutations = {
     state.entities = entities
   },
   saveEntity (state) {
-    var p = path.join(__dirname, '../../../../static/', 'entity.json')
-    fs.writeFileSync(p, JSON.stringify(state.entities, null, 4), 'utf8')
+    storage.set('entity', state.entities, function (error) {
+      if (error) {
+        throw error
+      }
+    })
+    // var p = path.join(__dirname, '../../../../static/', 'entity.json')
+    // fs.writeFileSync(p, JSON.stringify(state.entities, null, 4), 'utf8')
   }
 }
 

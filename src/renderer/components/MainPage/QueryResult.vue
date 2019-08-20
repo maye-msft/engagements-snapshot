@@ -7,38 +7,16 @@
     :default-sort="{prop: 'date', order: 'descending'}"
     style="width: 100%"
   >
-    <el-table-column type="expand" fixed>
-      <template slot-scope="props">
-      <el-form>
 
-        <template v-for="fieldkey in Object.keys(objects[props.row.id].value.fields)">
-          <template v-if="typeof objects[props.row.id].value.fields[fieldkey] != 'object'">
-            <el-form-item :label="fieldkey">
-              <span v-html="objects[props.row.id].value.fields[fieldkey]"></span>
-            </el-form-item>
-          </template>
-          <template
-            v-else
-            v-for="subfieldkey in Object.keys(objects[props.row.id].value.fields[fieldkey] )"
-          >
-            <template
-              v-if="typeof objects[props.row.id].value.fields[fieldkey][subfieldkey] != 'object'"
-            >
-              <el-form-item :label="fieldkey+'-'+subfieldkey">
-                <span v-html="objects[props.row.id].value.fields[fieldkey][subfieldkey]"></span>
-              </el-form-item>
-            </template>
-          </template>
-        </template>
-      </el-form>
-      </template>
-    </el-table-column>
     <el-table-column sortable fixed label="ID" width="100">
       <template slot-scope="scope">
         <el-button @click="showUrl(scope.row.engagementUrl)" type="text">{{ scope.row.id }}</el-button>
       </template>
     </el-table-column>
-    <el-table-column sortable prop="organizationId" label="Org" width="180">
+    <el-table-column sortable prop="organizationId" label="Org" width="180"
+      :filters="orgs"
+      :filter-method="filterOrg"
+      >
       <template slot-scope="scope">
         <el-button
           @click="showUrl(scope.row.organizationUrl)"
@@ -80,6 +58,32 @@
         <span>{{ scope.row.startDate }} - {{ scope.row.endDate }}</span>
       </template>
     </el-table-column>
+    <!-- <el-table-column type="expand">
+      <template slot-scope="props">
+      <el-form style="max-height:300px;overflow:auto">
+
+        <template v-for="fieldkey in Object.keys(objects[props.row.id].value.fields)">
+          <template v-if="typeof objects[props.row.id].value.fields[fieldkey] != 'object'">
+            <el-form-item :label="fieldkey" style="font-size:medium">
+              <span v-html="objects[props.row.id].value.fields[fieldkey]"></span>
+            </el-form-item>
+          </template>
+          <template
+            v-else
+            v-for="subfieldkey in Object.keys(objects[props.row.id].value.fields[fieldkey] )"
+          >
+            <template
+              v-if="typeof objects[props.row.id].value.fields[fieldkey][subfieldkey] != 'object'"
+            >
+              <el-form-item :label="fieldkey+'-'+subfieldkey">
+                <span v-html="objects[props.row.id].value.fields[fieldkey][subfieldkey]"></span>
+              </el-form-item>
+            </template>
+          </template>
+        </template>
+      </el-form>
+      </template>
+    </el-table-column> -->
   </el-table>
 </template>
 
@@ -96,17 +100,25 @@ export default {
     }),
     orgs() {
       var orgs = [];
+      var cache = []
       this.engagements.forEach(eng => {
+        if(cache.indexOf(eng.organizationId)!=-1)
+          return;
+        cache.push(eng.organizationId)
         orgs.push({ text: eng.organization, value: eng.organizationId });
       });
       return orgs;
     },
     cates() {
       var cates = [{ text: "N/A", value: "N/A" }];
+      var cache = []
       this.engagements.forEach(eng => {
         if (eng.category) {
           eng.category.forEach(cate => {
+            if(cache.indexOf(cate)!=-1)
+              return;
             cates.push({ text: cate, value: cate });
+            cache.push(cate)
           });
         }
       });

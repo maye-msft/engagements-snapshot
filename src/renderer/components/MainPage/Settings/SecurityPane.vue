@@ -3,7 +3,7 @@
     <el-row>
       <el-col :xs="24">
         <el-form-item label="Azure DevOps Access Token">
-          <el-input v-model="access_token" @change="saveToken"></el-input>
+          <el-input v-model="access_token" @change="saveToken" show-password></el-input>
         </el-form-item>
       </el-col>
     </el-row>
@@ -31,11 +31,8 @@ export default {
     
   },
   methods: {
-    ...mapActions("Token", ["setToken"]),
-    saveToken() {
-      var p = path.join(__dirname, '../../../../../static/', 'token.json')
-      fs.writeFileSync(p, `{"TOKEN":"${this.access_token}"}`,'utf8')
-    }
+    ...mapActions("Token", ["setToken", "saveToken"]),
+
   }
 };
 </script>

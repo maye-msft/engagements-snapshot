@@ -31,6 +31,9 @@
           <i class="el-icon-search"></i>
         </el-button>
       </el-col>
+      <el-col :xs="24">
+         <el-progress :text-inside="true" :stroke-width="24" :percentage="progressvalue" ></el-progress>
+      </el-col>
     </el-row>
   </el-form>
 </template>
@@ -38,6 +41,8 @@
 import { QueryHelper } from "./ado/connection";
 import { mapState, mapMutations, mapActions } from "vuex";
 import Fuse from 'fuse.js';
+import { setInterval } from 'timers';
+import { Loading } from 'element-ui';
 function getDate2(dateString) {
     const sdate = dateString.substr(0, 10).split("-")
     return new Date(sdate[0], sdate[1] - 1, sdate[2]).getTime();
@@ -46,7 +51,7 @@ export default {
   data() {
     return {
       objects: {},
-      loading: false,
+      loading: true,
       progressvalue: 0,
       progresscount: 0,
       engagements: [],
@@ -79,8 +84,12 @@ export default {
       const queryHelper = new QueryHelper(this.access_token, "CSEng");
       var that = this;
       that.loading = true;
+      that.progresscount = 0
+      that.progressvalue = 0
+      let loadingInstance = Loading.service({ fullscreen: true });
       this.queryWorkItems(queryHelper)
         .then(result => {
+
           that.objects = result;
           let keys = Object.keys(that.objects);
           let count = 0;
@@ -89,6 +98,10 @@ export default {
             that
               .loadWorkItems(queryHelper, ids)
               .then(result2 => {
+                that.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
+                  loadingInstance.close();
+                });
+
                 that.loading = false;
                 ids.forEach(id => {
                   result2.forEach(res => {
