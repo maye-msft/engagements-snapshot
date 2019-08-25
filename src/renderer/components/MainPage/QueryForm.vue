@@ -84,8 +84,14 @@ export default {
       const queryHelper = new QueryHelper(this.access_token, "CSEng");
       var that = this;
       that.loading = true;
-      that.progresscount = 0
+
+
+      that.objects = {}
       that.progressvalue = 0
+      that.progresscount = 0
+      that.engagements = []
+      that.categoryinfo = {}
+
       let loadingInstance = Loading.service({ fullscreen: true });
       this.queryWorkItems(queryHelper)
         .then(result => {
@@ -113,14 +119,14 @@ export default {
                 that.progressvalue = Math.round(
                   (that.progresscount / keys.length) * 100
                 );
-                console.log(that.progressvalue);
+                //console.log(that.progressvalue);
 
                 if (that.progresscount == keys.length) {
                   that.treeitems = that.calctreeitems()
                   // that.tasks = that.buildTasks(that.treeitems).map(task => Object.assign({}, task))
                   that.categoryinfo = that.engagement2Category();
-                  console.log(that.categoryinfo);
-                  console.log(that.engagements);
+                  //console.log(that.categoryinfo);
+                  //console.log(that.engagements);
                   that.setEngagements(that.engagements)
                   that.setObjects(that.objects)
                   
@@ -337,7 +343,7 @@ export default {
 
     fuseSearch(word, list) {
       var options = {
-        threshold: 0.2,
+        threshold: 0.5,
         location: 0,
         distance: 100,
         maxPatternLength: 32,
@@ -345,6 +351,8 @@ export default {
         keys: ["label", "description"],
         id: "id"
       };
+
+
       var fuse = new Fuse(list, options); // "list" is the item array
       return fuse.search(word);
     },
@@ -354,18 +362,25 @@ export default {
       this.entities.forEach(entity => {
         var keywords = entity.keywords.split("\n");
         keywords.forEach(keyword => {
-          var engagements = that.fuseSearch(keyword, that.engagements);
-          engagements.forEach(eng => {
-            entity2engagements[eng] = entity2engagements[eng] || [];
-            if (entity2engagements[eng].indexOf(entity.name) == -1) {
-              entity2engagements[eng].push(entity.name);
-            }
-          });
+          if(keyword.trim()!="") {
+            var engagements = that.fuseSearch(keyword, that.engagements);
+            engagements.forEach(eng => {
+              entity2engagements[eng] = entity2engagements[eng] || [];
+              if (entity2engagements[eng].indexOf(entity.name) == -1) {
+                entity2engagements[eng].push(entity.name);
+              }
+            });
+          }
         });
       });
       //console.log(entity2engagements);
 
       return entity2engagements;
+    },
+    updateCategory() {
+      this.categoryinfo = this.engagement2Category();
+      this.setEngagements(this.engagements)
+      this.setObjects(this.objects)
     },
     engagement2Category() {
       var that = this;
@@ -416,7 +431,7 @@ export default {
             categoriesData[eng.id]
       });
 
-      //console.log(categoriesData);
+      console.log(categoriesData);
       return categoriesData;
     }
   },

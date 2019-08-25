@@ -10,6 +10,9 @@ const mutations = {
   addEntity (state, entity) {
     state.entities.push({ name: entity, keywords: '' })
   },
+  addEntityWithKeyword (state, param) {
+    state.entities.push({ name: param[0], keywords: param[1] })
+  },
   removeEntity (state, index) {
     state.entities.splice(index, 1)
   },
@@ -37,6 +40,10 @@ const mutations = {
 const actions = {
   addEntity ({ commit }, data) {
     commit('addEntity', data)
+    commit('saveEntity')
+  },
+  addEntityWithKeyword ({ commit }, data) {
+    commit('addEntityWithKeyword', data)
     commit('saveEntity')
   },
   removeEntity ({ commit }, index) {

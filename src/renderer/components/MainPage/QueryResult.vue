@@ -7,8 +7,35 @@
     :default-sort="{prop: 'date', order: 'descending'}"
     style="width: 100%"
   >
-
-    <el-table-column sortable fixed label="ID" width="100">
+<el-table-column  type="expand">
+      <template slot-scope="props">
+      <el-form >
+        <el-form-item style="width:600px;font-size:medium">
+            <span v-html="objects[props.row.id].value.fields['System.Description']"></span>
+        </el-form-item>
+        <!-- <template v-for="fieldkey in Object.keys(objects[props.row.id].value.fields)">
+          <template v-if="typeof objects[props.row.id].value.fields[fieldkey] != 'object'">
+            <el-form-item :label="fieldkey" style="font-size:medium">
+              <span v-html="objects[props.row.id].value.fields[fieldkey]"></span>
+            </el-form-item>
+          </template>
+          <template
+            v-else
+            v-for="subfieldkey in Object.keys(objects[props.row.id].value.fields[fieldkey] )"
+          >
+            <template
+              v-if="typeof objects[props.row.id].value.fields[fieldkey][subfieldkey] != 'object'"
+            >
+              <el-form-item :label="fieldkey+'-'+subfieldkey">
+                <span v-html="objects[props.row.id].value.fields[fieldkey][subfieldkey]"></span>
+              </el-form-item>
+            </template>
+          </template>
+        </template> -->
+      </el-form>
+      </template>
+    </el-table-column>
+    <el-table-column sortable  label="ID" width="100">
       <template slot-scope="scope">
         <el-button @click="showUrl(scope.row.engagementUrl)" type="text">{{ scope.row.id }}</el-button>
       </template>
@@ -58,33 +85,10 @@
         <span>{{ scope.row.startDate }} - {{ scope.row.endDate }}</span>
       </template>
     </el-table-column>
-    <!-- <el-table-column type="expand">
-      <template slot-scope="props">
-      <el-form style="max-height:300px;overflow:auto">
-
-        <template v-for="fieldkey in Object.keys(objects[props.row.id].value.fields)">
-          <template v-if="typeof objects[props.row.id].value.fields[fieldkey] != 'object'">
-            <el-form-item :label="fieldkey" style="font-size:medium">
-              <span v-html="objects[props.row.id].value.fields[fieldkey]"></span>
-            </el-form-item>
-          </template>
-          <template
-            v-else
-            v-for="subfieldkey in Object.keys(objects[props.row.id].value.fields[fieldkey] )"
-          >
-            <template
-              v-if="typeof objects[props.row.id].value.fields[fieldkey][subfieldkey] != 'object'"
-            >
-              <el-form-item :label="fieldkey+'-'+subfieldkey">
-                <span v-html="objects[props.row.id].value.fields[fieldkey][subfieldkey]"></span>
-              </el-form-item>
-            </template>
-          </template>
-        </template>
-      </el-form>
-      </template>
-    </el-table-column> -->
+    
   </el-table>
+
+  
 </template>
 
 <script>
@@ -157,4 +161,5 @@ export default {
     }
   }
 };
+
 </script>

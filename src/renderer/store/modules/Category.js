@@ -24,6 +24,18 @@ const mutations = {
       secondaryobjects: []
     })
   },
+  addCategoryRuleWithName (state, param) {
+    state.categories.push({
+      name: param[0],
+      rules: [
+        {
+          name: 'Rule',
+          primaryobjects: [param[1]],
+          secondaryobjects: []
+        }
+      ]
+    })
+  },
   removeCategoryRule (state, param) {
     var cateIndex = param[0]
     var index = param[1]
@@ -47,6 +59,10 @@ const mutations = {
 const actions = {
   addCategory ({ commit }, category) {
     commit('addCategory', category)
+    commit('saveCategory')
+  },
+  addCategoryRuleWithName ({ commit }, category) {
+    commit('addCategoryRuleWithName', category)
     commit('saveCategory')
   },
   removeCategory ({ commit }, index) {

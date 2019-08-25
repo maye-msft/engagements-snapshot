@@ -59,6 +59,7 @@
     "@types/dotenv": "^6.1.1",
     "axios": "^0.18.0",
     "azure-devops-node-api": "^9.0.1",
+    "electron-context-menu": "^0.14.0",
     "electron-json-storage": "^4.1.7",
     "electron-storage": "^1.0.7",
     "element-theme-dark": "^1.0.3",
