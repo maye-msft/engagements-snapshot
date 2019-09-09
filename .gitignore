@@ -101,3 +101,6 @@ static/category.json
 static/entity.json
 static/token.json
 static/token.json
+src/renderer/components/MainPage/ado/.env.ado
+src/renderer/components/MainPage/ado/connection.jsbk
+package-lock.json

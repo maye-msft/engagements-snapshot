@@ -1,6 +1,6 @@
 <template>
-  <el-container id="page">
-    <el-row style="width:98%">
+  <el-container id="page" style="width:98%">
+    <!-- <el-row style="width:98%">
       <el-col :xs="24">
         <el-header>
           <query-form ref="queryform"></query-form>
@@ -27,7 +27,30 @@
           </el-tab-pane>
         </el-tabs>
       </el-col>
-    </el-row>
+    </el-row>-->
+
+    <el-tabs type="border-card" style="height: 100%;width:100%">
+      <el-tab-pane label="Query">
+        <el-row :gutter="20">
+          <el-col :span="6">
+            <query-form ref="queryform"></query-form>
+          </el-col>
+          <el-col :span="18" style="height: 100%;">
+            <query-result></query-result>
+          </el-col>
+        </el-row>
+      </el-tab-pane>
+
+      <el-tab-pane label="Entity">
+        <entity-pane></entity-pane>
+      </el-tab-pane>
+      <el-tab-pane label="Category Rule">
+        <category-pane></category-pane>
+      </el-tab-pane>
+      <el-tab-pane label="Access Token">
+        <security-pane></security-pane>
+      </el-tab-pane>
+    </el-tabs>
 
     <el-dialog title="Add Keyword" :visible.sync="dialogFormVisible">
       <el-form>
@@ -102,8 +125,10 @@
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
 import QueryForm from "./MainPage/QueryForm";
-import Settings from "./MainPage/Settings";
 import QueryResult from "./MainPage/QueryResult";
+import EntityPane from "./MainPage/Settings/EntityPane";
+import CategoryPane from "./MainPage/Settings/CategoryPane";
+import SecurityPane from "./MainPage/Settings/SecurityPane";
 import fs from "fs";
 import path from "path";
 import os from "os";
@@ -115,7 +140,13 @@ import contextMenu from "electron-context-menu";
 // const { mapState } = createNamespacedHelpers('Counter')
 
 export default {
-  components: { QueryForm, QueryResult, Settings },
+  components: {
+    QueryForm,
+    QueryResult,
+    EntityPane,
+    CategoryPane,
+    SecurityPane
+  },
   methods: {
     ...mapActions("Entity", [
       "importEntities",
@@ -254,14 +285,18 @@ export default {
     // this.importCategories(scenario.categories)
 
     const defaultDataPath = storage.getDefaultDataPath();
+    console.log("defaultDataPath=" + defaultDataPath);
+
     var that = this;
     storage.get("token", function(error, data) {
       if (error) throw error;
 
       if (Object.keys(data).length == 0) {
-        var token_path = path.join(__static, "token.json");
-        var token_json = JSON.parse(fs.readFileSync(token_path, "utf8"));
-        that.setToken(token_json.TOKEN);
+        try {
+          var token_path = path.join(__static, "token.json");
+          var token_json = JSON.parse(fs.readFileSync(token_path, "utf8"));
+          that.setToken(token_json.TOKEN);
+        } catch (err) {}
       }
     });
 
@@ -317,5 +352,7 @@ export default {
   font-family: Helvetica, sans-serif;
   text-align: center;
   margin: 0.5rem;
+  overflow: hidden;
+  height:100%
 }
 </style>

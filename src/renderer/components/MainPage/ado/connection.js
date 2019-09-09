@@ -9,14 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import * as azdev from "azure-devops-node-api";
 import { resolve } from "path";
 import { config } from "dotenv";
+import { EventEmitter } from "events";
 config({ path: resolve(__dirname, "../.env.ado") });
 let orgUrl = "https://dev.azure.com/csefy19";
+class MyEmitter extends EventEmitter {
+}
 export class QueryHelper {
     constructor(token, project) {
         this.token = token;
         this.project = project;
         let authHandler = azdev.getPersonalAccessTokenHandler(token);
         this.connection = new azdev.WebApi(orgUrl, authHandler);
+        this.myEmitter = new MyEmitter();
     }
     runQuery(wiql) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -194,5 +198,110 @@ WHERE
             });
             //return this.runQuery(querystring)
         });
+    }
+    queryEngagements(industry, startday, endday, textfilter) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.myEmitter.emit('querystarting', 0);
+            let results = yield this.loadParticipantByIndustry(industry, startday, endday);
+            let keys = Object.keys(results);
+            let count = 0;
+            const myEmitter = new MyEmitter();
+            // console.log(keys.length);
+            let that = this;
+            this.myEmitter.emit('getresults', keys.length, count);
+            for (let i = 0; i < keys.length; i += 100) {
+                let ids = keys.slice(i, Math.min(keys.length, i + 100));
+                let result2 = yield this.getWorkItems(ids);
+                count = count + result2.length;
+                this.myEmitter.emit('getresults', keys.length, count);
+                ids.forEach(id => {
+                    result2.forEach(res => {
+                        if (res.id == id)
+                            results[id].value = res;
+                    });
+                });
+                // console.log(result2.length);
+                // this.getWorkItems(ids).then(result2 =>{
+                //     let result3 = result2 as Array<any>
+                //     count = count+result3.length
+                //     that.myEmitter.emit('getresults', keys.length, count)
+                //     ids.forEach(id => {
+                //         result3.forEach(res => {
+                //             if (res.id == id) 
+                //                 results[id].value = res;
+                //         });
+                //     });
+                //     if(keys.length == count) {
+                //         let engagements = buildEng()
+                //         that.myEmitter.emit('done', engagements)
+                //     }
+                // }).catch(err=>{
+                //     throw err
+                // })
+            }
+            // this.myEmitter.emit('getresults', keys.length, keys.length)
+            // function buildEng() {
+            //     var engagements = {}
+            //     keys.forEach(key => {
+            //         var obj = results[key].value;
+            //         if (obj && obj.fields["System.WorkItemType"] == "Engagement") {
+            //             engagements[key] = obj
+            //             engagements[key].d = key
+            //             engagements[key].Title = obj.fields['System.Title']
+            //             engagements[key].Description = obj.fields['System.Description']
+            //             engagements[key].Activity = []
+            //             results[key].children.forEach((child)=>{
+            //                 var activity = results[child].value
+            //                 activity.Participant = []
+            //                 results[child].children.forEach((child2)=>{
+            //                     activity.Participant.push(results[child2].value)
+            //                 })
+            //                 engagements[key].Activity.push(activity)
+            //             })
+            //         }
+            //     });
+            //     keys.forEach(key => {
+            //         var obj = results[key].value;
+            //         if (obj && obj.fields["System.WorkItemType"] == "Organization") {
+            //             results[key].children.forEach(child => {
+            //                 engagements[child].Organization = obj
+            //             })
+            //         } 
+            //     });
+            //     return engagements
+            // }
+            var engagements = {};
+            keys.forEach(key => {
+                var obj = results[key].value;
+                if (obj && obj.fields["System.WorkItemType"] == "Engagement") {
+                    engagements[key] = obj;
+                    engagements[key].d = key;
+                    engagements[key].Title = obj.fields['System.Title'];
+                    engagements[key].Description = obj.fields['System.Description'];
+                    engagements[key].Activity = [];
+                    results[key].children.forEach((child) => {
+                        var activity = results[child].value;
+                        activity.Participant = [];
+                        results[child].children.forEach((child2) => {
+                            activity.Participant.push(results[child2].value);
+                        });
+                        engagements[key].Activity.push(activity);
+                    });
+                }
+            });
+            keys.forEach(key => {
+                var obj = results[key].value;
+                if (obj && obj.fields["System.WorkItemType"] == "Organization") {
+                    results[key].children.forEach(child => {
+                        engagements[child].Organization = obj;
+                    });
+                }
+            });
+            this.myEmitter.emit('done', engagements);
+            return engagements;
+        });
+    }
+    getEmitter() {
+        return this.myEmitter;
     }
 }

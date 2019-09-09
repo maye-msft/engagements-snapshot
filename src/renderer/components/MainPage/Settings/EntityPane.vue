@@ -1,17 +1,16 @@
 <template>
-  <el-row :gutter="10">
+  <el-row :gutter="10"  >
     <el-col :xs="24" :md="4">
       <el-button type="primary" @click="addEntity('Entity')" style="width:100%;">
         <i class="el-icon-plus"></i> Add Entity
       </el-button>
     </el-col>
     <el-col :xs="24" :md="4">
-      <el-button type="danger" @click="deleteAllEntity()" style="width:100%;">
+      <el-button type="danger" @click="confirm(deleteAllEntity)" style="width:100%;">
         <i class="el-icon-delete"></i> Clear Entities
       </el-button>
     </el-col>
-
-    <el-col :xs="24" style>
+    <el-col :xs="24">
       <el-collapse v-model="activeNames" >
         <el-collapse-item v-for="(entity,i) in entities" :key="i" :name="i" :title="entity.name">
           <el-row>
@@ -40,7 +39,7 @@
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
 import EntityItem from "./EntityItem"
-
+import util from "./util"
 export default {
   components: { EntityItem },
   data() {
@@ -52,6 +51,9 @@ export default {
     ...mapActions("Entity", ["addEntity", "removeEntity", "deleteAllEntity", "saveEntity"]),
     handleChange(val) {
       this.saveEntity();
+    },
+    confirm(cb) {
+      util.confirm(cb)
     }
   },
   computed: {

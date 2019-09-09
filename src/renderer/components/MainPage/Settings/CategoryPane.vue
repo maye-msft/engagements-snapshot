@@ -6,7 +6,7 @@
       </el-button>
     </el-col>
     <el-col :xs="24" :md="6">
-      <el-button type="danger" @click="removeAllCategory()" style="width:100%;">
+      <el-button type="danger" @click="confirm(removeAllCategory)" style="width:100%;">
         <i class="el-icon-delete"></i> Clear Categories
       </el-button>
     </el-col>
@@ -100,6 +100,7 @@
 </template>
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
+import util from "./util"
 export default {
   data() {
     return {
@@ -117,6 +118,9 @@ export default {
     ]),
     handleChange(val) {
       this.saveCategory();
+    },
+    confirm(cb) {
+      util.confirm(cb)
     }
   },
   computed: {

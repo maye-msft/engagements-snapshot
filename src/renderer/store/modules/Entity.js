@@ -52,6 +52,7 @@ const actions = {
   },
   setEntity ({ commit }, param) {
     commit('setEntity', param)
+    commit('saveEntity')
   },
   deleteAllEntity ({ commit }) {
     commit('deleteAllEntity')

@@ -1,6 +1,13 @@
 const state = {
   engagements: [],
-  objects: {}
+  objects: {},
+  selectedColumns: [
+    '/fields/System.Title',
+    '/Organization/fields/System.Title',
+    '/fields/CSEngineering-V2.CountrySelection',
+    '/fields/System.State',
+    '/Categories'
+  ]
 }
 
 const mutations = {
@@ -9,6 +16,9 @@ const mutations = {
   },
   setObjects (state, objects) {
     state.objects = objects
+  },
+  setSelectedColumns (state, selectedColumns) {
+    state.selectedColumns = selectedColumns
   }
 }
 
@@ -18,6 +28,9 @@ const actions = {
   },
   setObjects ({ commit }, objects) {
     commit('setObjects', objects)
+  },
+  setSelectedColumns ({ commit }, selectedColumns) {
+    commit('setSelectedColumns', selectedColumns)
   }
 }
 

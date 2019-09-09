@@ -170,29 +170,5 @@
                 "secondaryobjects": []
             }
         ]
-    },
-    {
-        "name": "Test Category 1eeeeeeeeeeee",
-        "rules": [
-            {
-                "name": "Rule",
-                "primaryobjects": [
-                    "SCADA"
-                ],
-                "secondaryobjects": []
-            },
-            {
-                "name": "Rule",
-                "primaryobjects": [],
-                "secondaryobjects": []
-            },
-            {
-                "name": "Rule",
-                "primaryobjects": [
-                    "Predictive Maintenance"
-                ],
-                "secondaryobjects": []
-            }
-        ]
     }
 ]
