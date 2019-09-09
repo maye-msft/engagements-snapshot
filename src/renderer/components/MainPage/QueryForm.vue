@@ -71,6 +71,7 @@ import { Loading } from "element-ui";
 // import elasticlunr from "elasticlunr";
 import FlexSearch from "flexsearch"
 import Papa from "papaparse";
+import util from "./util"
 function getDate2(dateString) {
   const sdate = dateString.substr(0, 10).split("-");
   return new Date(sdate[0], sdate[1] - 1, sdate[2]).getTime();
@@ -120,6 +121,10 @@ export default {
       "setSelectedColumns"
     ]),
     onSubmit() {
+      if(!this.access_token) {
+        util.info("Please input AzDO Access Token in the 'Access Token' Panel.")
+        return
+      }
       let loadingInstance = Loading.service({ fullscreen: true });
       const queryHelper = new QueryHelper(this.access_token, "CSEng");
       let myEmitter = queryHelper.getEmitter();

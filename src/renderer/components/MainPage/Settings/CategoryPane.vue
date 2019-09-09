@@ -100,7 +100,7 @@
 </template>
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
-import util from "./util"
+import util from "../util"
 export default {
   data() {
     return {

@@ -39,7 +39,7 @@
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
 import EntityItem from "./EntityItem"
-import util from "./util"
+import util from "../util"
 export default {
   components: { EntityItem },
   data() {
